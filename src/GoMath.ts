@@ -85,12 +85,14 @@ export function pretty_coor_num2ch(coor: number): string {
     return PRETTY_COOR_SEQ[coor];
 }
 
-export function prettyCoords(x: number, y: number, board_height: number): string {
-    if (x >= 0) {
+export function prettyCoords(x: number, y: number, board_height: number): string | undefined {
+    if (x >= 0 && x < board_height && y >= 0 && y < board_height) {
         return pretty_coor_num2ch(x) + ("" + (board_height - y));
     }
-    return "pass";
+
+    return undefined;
 }
+
 export function decodeGTPCoordinate(move: string, width: number, height: number): JGOFMove {
     if (move === ".." || move.toLowerCase() === "pass") {
         return { x: -1, y: -1 };

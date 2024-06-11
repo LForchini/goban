@@ -89,14 +89,14 @@ describe("matrices", () => {
 
 describe("prettyCoords", () => {
     test("pass", () => {
-        expect(GoMath.prettyCoords(-1, -1, 19)).toBe("pass");
+        expect(GoMath.prettyCoords(-1, -1, 19)).toBe(undefined);
     });
 
     test("out of bounds", () => {
         // I doubt this is actually desired behavior.  Feel free to remove this
         // test after verifying nothing depends on this behavior.
-        expect(GoMath.prettyCoords(25, 9, 19)).toBe("undefined10");
-        expect(GoMath.prettyCoords(9, 25, 19)).toBe("K-6");
+        expect(GoMath.prettyCoords(25, 9, 19)).toBe(undefined);
+        expect(GoMath.prettyCoords(9, 25, 19)).toBe(undefined);
     });
 
     test("regular moves", () => {

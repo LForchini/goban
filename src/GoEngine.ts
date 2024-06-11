@@ -1048,7 +1048,7 @@ export class GoEngine extends EventEmitter<Events> {
     private opponent(): JGOFNumericPlayerColor {
         return this.player === 1 ? 2 : 1;
     }
-    public prettyCoords(x: number, y: number): string {
+    public prettyCoords(x: number, y: number): string | undefined {
         return GoMath.prettyCoords(x, y, this.height);
     }
     private incrementCurrentMarker(): void {
@@ -1328,7 +1328,7 @@ export class GoEngine extends EventEmitter<Events> {
                         if (this.board[y][x] !== this.player) {
                             console.log(
                                 "Invalid duplicate stone placement at " +
-                                    this.prettyCoords(x, y) +
+                                    (this.prettyCoords(x, y) ?? "pass") +
                                     " board color: " +
                                     this.board[y][x] +
                                     "   placed color: " +
@@ -1344,7 +1344,7 @@ export class GoEngine extends EventEmitter<Events> {
                     throw new GobanMoveError(
                         this.game_id || this.review_id || 0,
                         this.cur_move?.move_number ?? -1,
-                        this.prettyCoords(x, y),
+                        this.prettyCoords(x, y) ?? "pass",
                         "stone_already_placed_here",
                     );
                 }
@@ -1372,7 +1372,7 @@ export class GoEngine extends EventEmitter<Events> {
                             throw new GobanMoveError(
                                 this.game_id || this.review_id || 0,
                                 this.cur_move?.move_number ?? -1,
-                                this.prettyCoords(x, y),
+                                this.prettyCoords(x, y) ?? "pass",
                                 "move_is_suicidal",
                             );
                         }
@@ -1388,7 +1388,7 @@ export class GoEngine extends EventEmitter<Events> {
                         throw new GobanMoveError(
                             this.game_id || this.review_id || 0,
                             this.cur_move?.move_number ?? -1,
-                            this.prettyCoords(x, y),
+                            this.prettyCoords(x, y) ?? "pass",
                             "illegal_ko_move",
                         );
                     }
@@ -1402,7 +1402,7 @@ export class GoEngine extends EventEmitter<Events> {
                             throw new GobanMoveError(
                                 this.game_id || this.review_id || 0,
                                 this.cur_move?.move_number ?? -1,
-                                this.prettyCoords(x, y),
+                                this.prettyCoords(x, y) ?? "pass",
                                 "illegal_board_repetition",
                             );
                         }
